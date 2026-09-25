@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Loan Default Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <h1>Loan Default Prediction System</h1>
+                <small>Machine Learning Project</small>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/predict">Prediction</a></li>
+                <li><a href="/models">Model</a></li>
+                <li><a href="/about" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">About This Project</h1>
+            <p class="page-desc">Loan Default Prediction using Gradient Boosting classification.</p>
+
+            <div class="card">
+                <div class="about-section">
+                    <h2>Project Objective</h2>
+                    <p>This project builds a Loan Default Prediction System using the Gradient Boosting Classifier. The objective is to predict whether a loan applicant is likely to default on loan repayment based on their financial profile, credit history, employment details, and loan specifications.</p>
+                    <p style="margin-top: 8px;">The target variable is <strong>Default</strong> (0 = No Default, 1 = Default).</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Dataset</h2>
+                    <table class="tech-tbl">
+                        <tr><th>Records</th><td>255,347 loan applications</td></tr>
+                        <tr><th>Target Variable</th><td>Default (0 = No Default, 1 = Default)</td></tr>
+                        <tr><th>Class Distribution</th><td>~88.4% non-default, ~11.6% default (imbalanced)</td></tr>
+                        <tr><th>Source File</th><td>Loan_default.csv</td></tr>
+                        <tr><th>Features</th><td>17 columns (9 numeric, 4 categorical, 3 binary, 1 ID)</td></tr>
+                    </table>
+                </div>
+
+                <div class="about-section">
+                    <h2>Features Used</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+                        <ul style="font-size: 0.86rem; color: var(--text-sec); padding-left: 18px;">
+                            <li>Age</li><li>Income</li><li>Loan Amount</li><li>Credit Score</li>
+                            <li>Months Employed</li><li>Number of Credit Lines</li><li>Interest Rate</li>
+                            <li>Loan Term</li><li>DTI Ratio</li>
+                        </ul>
+                        <ul style="font-size: 0.86rem; color: var(--text-sec); padding-left: 18px;">
+                            <li>Education</li><li>Employment Type</li><li>Marital Status</li>
+                            <li>Loan Purpose</li><li>Has Mortgage</li><li>Has Dependents</li><li>Has Co-Signer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>Machine Learning Algorithm</h2>
+                    <p style="font-size: 0.88rem; color: var(--text-sec); line-height: 1.7;">
+                        <strong>Gradient Boosting Classifier</strong> — An ensemble method that builds sequential decision trees, where each tree corrects the errors of the previous one. The final prediction is a weighted combination of all trees.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Preprocessing</h2>
+                    <ol style="font-size: 0.86rem; color: var(--text-sec); padding-left: 18px;">
+                        <li>Duplicate removal</li>
+                        <li>One-hot encoding for categorical variables (Education, Employment Type, Loan Purpose, Marital Status)</li>
+                        <li>Binary mapping for Yes/No features (HasMortgage, HasDependents, HasCoSigner)</li>
+                        <li>StandardScaler normalization for numeric features</li>
+                        <li>Train/Test split: 80/20 (random_state=42)</li>
+                    </ol>
+                </div>
+
+                <div class="about-section">
+                    <h2>Evaluation Metrics</h2>
+                    <ul style="font-size: 0.86rem; color: var(--text-sec); padding-left: 18px;">
+                        <li><strong>Accuracy</strong> — Overall correct predictions / total predictions</li>
+                        <li><strong>Precision</strong> — True positives / (True positives + False positives)</li>
+                        <li><strong>Recall</strong> — True positives / (True positives + False negatives)</li>
+                        <li><strong>F1-Score</strong> — Harmonic mean of Precision and Recall</li>
+                        <li><strong>ROC-AUC</strong> — Area Under the ROC Curve</li>
+                    </ul>
+                </div>
+
+                <div class="about-section" style="margin-bottom: 0;">
+                    <h2>Technology Stack</h2>
+                    <table class="tech-tbl">
+                        <tr><th>Frontend</th><td>HTML, CSS, JavaScript</td></tr>
+                        <tr><th>Backend</th><td>Python, Flask</td></tr>
+                        <tr><th>Machine Learning</th><td>scikit-learn (GradientBoostingClassifier)</td></tr>
+                        <tr><th>Data Processing</th><td>Pandas, NumPy</td></tr>
+                        <tr><th>Model Serialization</th><td>Joblib</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Loan Default Prediction System</span>
+            <span>Machine Learning Project</span>
+        </div>
+    </footer>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "model": "Gradient Boosting Classifier",
+  "model_id": "gradient_boosting",
+  "algorithm": "GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)",
+  "description": "Gradient Boosting is an ensemble classification algorithm that builds a sequence of weak learners, where each new learner attempts to correct the errors made by previous ones.",
+  "accuracy": 0.887331,
+  "precision": 0.657328,
+  "recall": 0.051695,
+  "f1_score": 0.095852,
+  "roc_auc": 0.757207,
+  "cv_mean_accuracy": 0.886032,
+  "cv_std_dev": 0.000426,
+  "confusion_matrix": {
+    "tn": 45011,
+    "fp": 159,
+    "fn": 5595,
+    "tp": 305
+  },
+  "dataset": {
+    "total_records": 255347,
+    "non_default": 225694,
+    "default": 29653,
+    "imbalance_note": "Dataset is imbalanced (~88.4% non-default, ~11.6% default). High accuracy alone does not indicate good default detection. Evaluate Recall and F1-Score."
+  }
+}

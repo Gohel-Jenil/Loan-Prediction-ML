@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction — Loan Default Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <h1>Loan Default Prediction System</h1>
+                <small>Machine Learning Project</small>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/predict" class="active">Prediction</a></li>
+                <li><a href="/models">Model</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing...</div>
+    </div>
+    <div class="toast-container" id="toast-container"></div>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Loan Default Prediction</h1>
+            <p class="page-desc">Enter the applicant information below to generate a default prediction using Gradient Boosting Classifier.</p>
+
+            <div class="card">
+                <div class="presets-bar">
+                    <span class="presets-label">Sample Data:</span>
+                    <button class="preset-btn" data-preset="default">Standard</button>
+                    <button class="preset-btn" data-preset="high_risk">High Risk</button>
+                    <button class="preset-btn" data-preset="borderline">Borderline</button>
+                </div>
+
+                <p style="font-size: 0.82rem; color: var(--text-sec); margin-bottom: 18px;">
+                    Prediction Model: <strong style="color: var(--primary);">Gradient Boosting Classifier</strong>
+                </p>
+
+                <form id="predict-form" novalidate>
+                    <div class="form-section">Personal Information</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="e.g. 38" min="18" max="69" required>
+                            <div class="form-error">Age must be between 18 and 69</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="education">Education</label>
+                            <select class="form-control" id="education" name="education" required>
+                                <option value="Bachelor's">Bachelor's</option>
+                                <option value="Master's">Master's</option>
+                                <option value="High School">High School</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                            <div class="form-error">Select education level</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status</label>
+                            <select class="form-control" id="maritalStatus" name="maritalStatus" required>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Single">Single</option>
+                            </select>
+                            <div class="form-error">Select marital status</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">Financial Information</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="income">Annual Income ($)</label>
+                            <input type="number" class="form-control" id="income" name="income" placeholder="e.g. 82000" min="15000" max="150000" required>
+                            <div class="form-error">Must be between 15,000 and 150,000</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="creditScore">Credit Score</label>
+                            <input type="number" class="form-control" id="creditScore" name="creditScore" placeholder="e.g. 740" min="300" max="850" required>
+                            <div class="form-error">Must be between 300 and 850</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtiRatio">DTI Ratio</label>
+                            <input type="number" class="form-control" id="dtiRatio" name="dtiRatio" placeholder="e.g. 0.28" min="0.1" max="0.9" step="0.01" required>
+                            <div class="form-error">Must be between 0.10 and 0.90</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="numCreditLines">Number of Credit Lines</label>
+                            <input type="number" class="form-control" id="numCreditLines" name="numCreditLines" placeholder="e.g. 4" min="1" max="4" required>
+                            <div class="form-error">Must be between 1 and 4</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">Employment Information</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employmentType">Employment Type</label>
+                            <select class="form-control" id="employmentType" name="employmentType" required>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Self-employed">Self-employed</option>
+                                <option value="Unemployed">Unemployed</option>
+                            </select>
+                            <div class="form-error">Select employment type</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="monthsEmployed">Months Employed</label>
+                            <input type="number" class="form-control" id="monthsEmployed" name="monthsEmployed" placeholder="e.g. 60" min="0" max="120" required>
+                            <div class="form-error">Must be between 0 and 120</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">Loan Information</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount ($)</label>
+                            <input type="number" class="form-control" id="loanAmount" name="loanAmount" placeholder="e.g. 28000" min="5000" max="250000" required>
+                            <div class="form-error">Must be between 5,000 and 250,000</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <input type="number" class="form-control" id="interestRate" name="interestRate" placeholder="e.g. 9.5" min="2" max="25" step="0.1" required>
+                            <div class="form-error">Must be between 2 and 25</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (Months)</label>
+                            <select class="form-control" id="loanTerm" name="loanTerm" required>
+                                <option value="12">12</option>
+                                <option value="24">24</option>
+                                <option value="36" selected>36</option>
+                                <option value="48">48</option>
+                                <option value="60">60</option>
+                            </select>
+                            <div class="form-error">Select loan term</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loanPurpose">Loan Purpose</label>
+                            <select class="form-control" id="loanPurpose" name="loanPurpose" required>
+                                <option value="Auto">Auto</option>
+                                <option value="Business">Business</option>
+                                <option value="Education">Education</option>
+                                <option value="Home">Home</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="form-error">Select loan purpose</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">Additional Information</div>
+                    <div class="switch-row">
+                        <div class="switch-item">
+                            <div><div class="sw-label">Has Mortgage</div><div class="sw-sub">Existing property mortgage</div></div>
+                            <input type="checkbox" class="toggle" id="hasMortgage" name="hasMortgage">
+                        </div>
+                        <div class="switch-item">
+                            <div><div class="sw-label">Has Dependents</div><div class="sw-sub">Financially dependent family</div></div>
+                            <input type="checkbox" class="toggle" id="hasDependents" name="hasDependents">
+                        </div>
+                        <div class="switch-item">
+                            <div><div class="sw-label">Has Co-Signer</div><div class="sw-sub">Guarantor on loan</div></div>
+                            <input type="checkbox" class="toggle" id="hasCoSigner" name="hasCoSigner">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 28px;">
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Generate Prediction</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-section" class="hidden">
+                <div class="card">
+                    <h2>Prediction Result</h2>
+                    <div class="result-banner" id="result-banner">
+                        <div class="result-icon" id="result-icon"></div>
+                        <div>
+                            <h3 id="result-title"></h3>
+                            <p id="result-subtitle"></p>
+                        </div>
+                    </div>
+
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="r-label">Default Prediction</div>
+                            <div class="r-value" id="result-prediction"></div>
+                        </div>
+                        <div class="result-item">
+                            <div class="r-label">Estimated Default Probability</div>
+                            <div class="r-value" id="result-probability"></div>
+                            <div class="prob-bar"><div class="prob-fill" id="result-probability-bar"></div></div>
+                        </div>
+                        <div class="result-item">
+                            <div class="r-label">Risk Classification</div>
+                            <div class="r-value" id="result-risk-tier"></div>
+                        </div>
+                        <div class="result-item">
+                            <div class="r-label">Model Used</div>
+                            <div class="r-value">Gradient Boosting Classifier</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Key Factors</h2>
+                    <div class="factors-col">
+                        <div>
+                            <h4 style="color: var(--success);">Positive Factors</h4>
+                            <ul class="factor-list" id="positive-factors"></ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--danger);">Risk Factors</h4>
+                            <ul class="factor-list" id="risk-factors"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Submitted Applicant Information</h2>
+                    <div id="applicant-summary"></div>
+                </div>
+
+                <div class="notice notice-warn">
+                    <strong>Disclaimer:</strong> This is a machine learning prediction based on statistical patterns in historical data. It should not be treated as a guaranteed financial decision or loan approval/rejection.
+                </div>
+
+                <div style="text-align: center; margin-top: 18px;">
+                    <button class="btn btn-outline" id="reset-btn">New Prediction</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Loan Default Prediction System</span>
+            <span>Machine Learning Project</span>
+        </div>
+    </footer>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

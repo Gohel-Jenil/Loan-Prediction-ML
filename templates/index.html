@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Default Prediction System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <h1>Loan Default Prediction System</h1>
+                <small>Machine Learning Project</small>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/predict">Prediction</a></li>
+                <li><a href="/models">Model</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="hero">
+                <h1>Loan Default Prediction System</h1>
+                <p>This application uses a Gradient Boosting classification model to predict the likelihood of loan default based on applicant information.</p>
+                <div class="hero-actions">
+                    <a href="/predict" class="btn btn-primary btn-lg">Predict Default Risk</a>
+                    <a href="/models" class="btn btn-outline btn-lg">View Model</a>
+                    <a href="/about" class="btn btn-outline btn-lg">About Project</a>
+                </div>
+            </section>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="val">255,347</div>
+                    <div class="lbl">Dataset Records</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val">Default (0/1)</div>
+                    <div class="lbl">Target Variable</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val">Gradient Boosting</div>
+                    <div class="lbl">Classification Model</div>
+                </div>
+                <div class="stat-box">
+                    <div class="val" id="stat-accuracy">&mdash;</div>
+                    <div class="lbl">Test Accuracy</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px;">
+                <div class="card">
+                    <h2>How the System Works</h2>
+                    <ol style="padding-left: 18px; color: var(--text-sec); font-size: 0.86rem; line-height: 1.9;">
+                        <li>Enter applicant information.</li>
+                        <li>Submit the prediction form.</li>
+                        <li>The Flask backend preprocesses the data.</li>
+                        <li>The Gradient Boosting model generates a prediction.</li>
+                        <li>The prediction result is displayed on screen.</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h2>Important</h2>
+                    <p style="color: var(--text-sec); font-size: 0.86rem; line-height: 1.7;">
+                        This system predicts the likelihood of loan default based on patterns in the training dataset.
+                        The prediction is a statistical estimate and should not be treated as a final loan approval or rejection decision.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Loan Default Prediction System</span>
+            <span>Machine Learning Project</span>
+        </div>
+    </footer>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model — Loan Default Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <h1>Loan Default Prediction System</h1>
+                <small>Machine Learning Project</small>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/predict">Prediction</a></li>
+                <li><a href="/models" class="active">Model</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Machine Learning Model</h1>
+            <p class="page-desc">This project uses a Gradient Boosting Classifier for loan default prediction.</p>
+
+            <div class="card">
+                <h2>Gradient Boosting Classifier</h2>
+                <p class="card-desc" id="model-description">Loading model information...</p>
+
+                <div class="notice notice-info" style="margin-bottom: 18px;">
+                    <strong>Note on dataset imbalance:</strong> The dataset is imbalanced (~88.4% non-default, ~11.6% default). High accuracy alone does not indicate good model performance. Evaluate Recall and F1-Score for default class detection.
+                </div>
+
+                <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 10px;">Evaluation Metrics</h3>
+                <table class="m-table" id="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="2" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" id="cm-card" style="display: none;">
+                <h2>Confusion Matrix</h2>
+                <table class="cm-table" id="cm-table"></table>
+            </div>
+
+            <div class="card">
+                <h2>About Gradient Boosting</h2>
+                <p style="color: var(--text-sec); font-size: 0.86rem; line-height: 1.7;">
+                    Gradient Boosting is an ensemble classification algorithm that builds a sequence of weak learners,
+                    where each new learner attempts to correct the errors made by previous ones. It combines many
+                    weak learners into a single strong learner by optimizing a loss function using gradient descent.
+                </p>
+                <p style="color: var(--text-sec); font-size: 0.86rem; line-height: 1.7; margin-top: 8px;">
+                    The model is trained on the Loan Default dataset (255,347 records) with features including
+                    applicant demographics, financial information, employment details, and loan specifications.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Loan Default Prediction System</span>
+            <span>Machine Learning Project</span>
+        </div>
+    </footer>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

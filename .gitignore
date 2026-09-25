@@ -1,0 +1,36 @@
+# Dataset (too large for GitHub, only needed for training)
+Loan_default.csv
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# PDF
+*.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environment
+venv/
+env/
+.env/
+
+# Flutter legacy
+legacy_flutter/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
